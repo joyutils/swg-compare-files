@@ -31,6 +31,7 @@ query GetStorageBagsObjects($storageBags: [ID!]!, $limit: Int!, $offset: Int!) {
   ) {
     objects {
       id
+      isAccepted
     }
   }
 }
@@ -82,8 +83,9 @@ async function getAllBucketObjects(bucketId) {
     const bucketObjects = bucketBagsWithObjects.map(bag => bag.objects).flat()
     objects = objects.concat(bucketObjects)
   }
-  console.log(`Found ${objects.length} objects`)
-  const objectsIds = objects.map(object => object.id)
+  const acceptedObjects = objects.filter(object => object.isAccepted)
+  console.log(`Found ${acceptedObjects.length} accepted objects`)
+  const objectsIds = acceptedObjects.map(object => object.id)
   const sortedObjectsIds = sortFiles(objectsIds)
   await fs.writeFile(REMOTE_FILES_PATH, JSON.stringify(sortedObjectsIds))
 }
