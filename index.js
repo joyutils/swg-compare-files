@@ -109,6 +109,9 @@ async function printDifferences() {
   uniqueInRemote.forEach(id => console.log(`Remote file ${id} is not present locally`))
   uniqueInLocal.forEach(id => console.log(`Unexpected local file ${id}`))
 
+  console.log(`Found ${uniqueInRemote.size} missing objects`)
+  console.log(`Found ${uniqueInLocal.size} unexpected local objects`)
+
   await fs.writeFile(DIFF_PATH, JSON.stringify({ unexpectedLocal: [...uniqueInLocal], missingObjects: [...uniqueInRemote] }))
 }
 
