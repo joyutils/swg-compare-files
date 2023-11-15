@@ -89,7 +89,9 @@ async function getAllBucketObjects(bucketId) {
 }
 
 async function getFilesList(path) {
+  console.log('Getting files...')
   const files = await fs.readdir(path)
+  console.log(`Found ${files.length} files`)
   const sortedFiles = sortFiles(files)
   await fs.writeFile(LOCAL_FILES_PATH, JSON.stringify(sortedFiles))
 }
