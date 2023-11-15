@@ -1,0 +1,17 @@
+Get a list of all local objects
+
+```sh
+node index.js localFiles ./data
+```
+
+Then fetch a list of all objects in a bucket (can take few minutes):
+
+```sh
+node index.js bucketObjects 0
+```
+
+Get the differences
+
+```
+node index.js diff
+```
